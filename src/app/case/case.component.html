@@ -1,0 +1,9 @@
+<div class="case" [style.background-color]="changeContent()">
+    <div class="content">
+      <div *ngIf="case.symbol === 'O'" >
+        <span class="icon-circle-outline"></span>
+      </div>
+      <div *ngIf="case.symbol === 'X'" >
+        <span class="icon-cross"></span>
+    </div>
+</div>
