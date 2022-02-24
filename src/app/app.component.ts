@@ -19,8 +19,9 @@ export class AppComponent implements OnInit{
 
   constructor(private ticTacToeService: TicTacToeService, private dialog: MatDialog) {
   }
-  openDialog(message: string) {
+  openDialog(message: string, color: string) {
     const data = {
+      textColor: color,
       title: message,
       confirmText: 'Restart'
     }
@@ -49,15 +50,15 @@ export class AppComponent implements OnInit{
             break;
           case "IS_OVER":
             this.gameResult = data;
-            this.openDialog('The game ends in a tie');
+            this.openDialog('The game ends in a tie', 'black');
             break;
           case "PLAYER_X_WINS":
             this.gameResult = data;
-            this.openDialog('Player X wins the game');
+            this.openDialog('Player X wins the game', 'red');
             break;
           case "PLAYER_O_WINS":
             this.gameResult = data;
-            this.openDialog('Player O wins the game');
+            this.openDialog('Player O wins the game', 'green');
             break;
         }
       }
