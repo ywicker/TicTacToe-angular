@@ -1,7 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Case } from './case';
-import { Player } from './player';
+import { DialogsConfirmComponent } from './dialogs-confirm/dialogs-confirm.component';
 import { TicTacToeService } from './tic-tac-toe.service';
 
 
@@ -17,9 +17,20 @@ export class AppComponent implements OnInit{
   activePlayer: string = '';
   gameResult: string = '';
 
-  constructor(private ticTacToeService: TicTacToeService) {
+  constructor(private ticTacToeService: TicTacToeService, private dialog: MatDialog) {
   }
-
+  openDialog(message: string) {
+    const data = {
+      title: message,
+      confirmText: 'Restart'
+    }
+    this.dialog.open(DialogsConfirmComponent, {
+      data,
+      width: '400px',
+      disableClose: true,
+    })
+    .afterClosed().subscribe(() => this.restart())
+  }
   
   ngOnInit() {
     this.refreshGrid();
@@ -37,9 +48,16 @@ export class AppComponent implements OnInit{
             this.activePlayer = "PLAYER_O";
             break;
           case "IS_OVER":
+            this.gameResult = data;
+            this.openDialog('The game ends in a tie');
+            break;
           case "PLAYER_X_WINS":
+            this.gameResult = data;
+            this.openDialog('Player X wins the game');
+            break;
           case "PLAYER_O_WINS":
             this.gameResult = data;
+            this.openDialog('Player O wins the game');
             break;
         }
       }

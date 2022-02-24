@@ -9,8 +9,7 @@
         <hr>
         <div class="grid-game">
           <div class="row">
-            <div class="col-6" [ngStyle]="{'font-weight': 'bold'}">Player's turn : Player {{activePlayer}}</div>
-            <div class="col-3"></div>
+            <div class="col-9" [ngStyle]="{'font-weight': 'bold'}">Player's turn : {{activePlayer}}</div>
             <button mat-raised-button color="basic" class="col-3" (click)="restart()">Restart</button>
           </div>
           <hr>

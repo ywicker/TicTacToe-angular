@@ -7,17 +7,21 @@ import { CaseComponent } from './case/case.component';
 import { TicTacToeService } from './tic-tac-toe.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogsConfirmComponent } from './dialogs-confirm/dialogs-confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CaseComponent
+    CaseComponent,
+    DialogsConfirmComponent
   ],
   imports: [
     BrowserModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [TicTacToeService],
   bootstrap: [AppComponent]
