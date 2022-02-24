@@ -1,6 +1,6 @@
 export class Player {
-    static xPlayerSymbol: string = 'X';
-    static oPlayerSymbol: string = 'O';
+    static xPlayerSymbol: string = 'PLAYER_X';
+    static oPlayerSymbol: string = 'PLAYER_O';
 
     symbol!: string;
 

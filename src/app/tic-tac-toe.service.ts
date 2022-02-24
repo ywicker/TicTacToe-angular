@@ -1,54 +1,31 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Case } from './case';
 import { Player } from './player';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicTacToeService {
-  players: Player[] = [];
-  xPlayerSymbol: string = 'X';
-  oPlayerSymbol: string = 'O';
 
-  title = 'ticTacToe-angular';
-  cases: Case[] = [];
-  activePlayer!: Player;
-
-  constructor() {
-    const playerX = new Player(Player.xPlayerSymbol);
-    this.players.push(new Player(Player.oPlayerSymbol));
-    this.players.push(playerX);
-    this.activePlayer = playerX;
-
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
-    this.cases.push(new Case);
+  constructor(private http: HttpClient) {
   }
-
-  getCellGridContent() {
-    return of(this.cases);
+  getState() {
+    return this.http.get<string>('http://localhost:8080/TicTacToe/state').toPromise();
   }
-
-  getActivePlayer() {
-    return of(this.activePlayer);
+  getGrid() {
+    return this.http.get<any>('http://localhost:8080/TicTacToe/grid').toPromise();
   }
-
-  newGame(){
-    this.cases.forEach(value => value.symbol='');
+  play(player: string ,c: Case){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post<any>('http://localhost:8080/TicTacToe/play', { playerValue: player, coordinateDTO: {x:c.x, y:c.y} }, httpOptions).toPromise();
   }
-
-  setSymbol(active: Case): void {
-    const activeCase = this.cases.find(c => c == active);
-    if(activeCase != undefined && activeCase.symbol == '') {
-      activeCase.symbol = this.activePlayer.symbol;
-      this.activePlayer = this.activePlayer.changePlayer(this.players);
-    }
+  restart() {
+    return this.http.post<any>('http://localhost:8080/TicTacToe/reset', {}).toPromise();
   }
 }

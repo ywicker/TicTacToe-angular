@@ -17,9 +17,9 @@ export class CaseComponent implements OnInit {
 
   changeContent(): string {
     if(this.case != null){
-      if(this.case.symbol == 'O'){
+      if(this.case.symbol == 'PLAYER_O'){
         return "green";
-      } else if(this.case.symbol == 'X'){
+      } else if(this.case.symbol == 'PLAYER_X'){
         return "red";
       }
     }
