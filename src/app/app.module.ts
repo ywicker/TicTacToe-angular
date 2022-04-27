@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsConfirmComponent } from './dialogs-confirm/dialogs-confirm.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DialogsConfirmComponent } from './dialogs-confirm/dialogs-confirm.compo
     MatButtonModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot()
   ],
   providers: [TicTacToeService],
   bootstrap: [AppComponent]

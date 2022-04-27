@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Case } from './case';
 import { DialogsConfirmComponent } from './dialogs-confirm/dialogs-confirm.component';
+import { NotificationService } from './notification.service';
 import { TicTacToeService } from './tic-tac-toe.service';
 
 
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit{
   activePlayer: string = '';
   gameResult: string = '';
 
-  constructor(private ticTacToeService: TicTacToeService, private dialog: MatDialog) {
+  constructor(private notifyService : NotificationService, private ticTacToeService: TicTacToeService, private dialog: MatDialog) {
   }
   openDialog(message: string, color: string) {
     const data = {
@@ -101,4 +102,34 @@ export class AppComponent implements OnInit{
     this.ticTacToeService.restart()
       .then(() => this.refreshGrid());
   }
+
+  showToasterSuccess(){
+
+    this.notifyService.showSuccess("Data shown successfully !!", "ItSolutionStuff.com")
+
+}
+
+
+
+showToasterError(){
+
+    this.notifyService.showError("Something is wrong", "ItSolutionStuff.com")
+
+}
+
+
+
+showToasterInfo(){
+
+    this.notifyService.showInfo("This is info", "ItSolutionStuff.com")
+
+}
+
+
+
+showToasterWarning(){
+
+    this.notifyService.showWarning("This is warning", "ItSolutionStuff.com")
+
+}
 }
